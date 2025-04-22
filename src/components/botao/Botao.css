@@ -1,0 +1,10 @@
+.botao{
+    padding: 10px 100px;
+    border: none;
+    cursor: pointer;
+    background-color: brown;
+    color: white;
+    border-radius: 6px;
+    /* Negrito */
+    font-weight: bolder;
+}
