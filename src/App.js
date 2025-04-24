@@ -5,6 +5,7 @@ import CadastroFilme from './pages/cadastroFilme/CadastroFilme.jsx'
 function App() {
   return (
     <>
+    {/* Chamar as paginas !! */}
     {/* <Login/> */}
     <CadastroFilme/>
     </>
