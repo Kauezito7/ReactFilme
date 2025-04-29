@@ -11,13 +11,9 @@ const  CadastroGenero = () => {
         <>
         <Header/>
         <main>
-
-        <Cadastro titulo = "Cadastro de Genero"
-                  visibilidade = "none"
-                  placeholder = "Genero"
-        />
-            <Lista/>
-            
+          <Cadastro titulo = "Cadastro de Genero"  visibilidade = "none" placeholder = "Genero"/>
+          
+          <Lista titulo = "Lista de Genero" visibilidade = "none"/>
         </main>
         <Footer/>
         </>

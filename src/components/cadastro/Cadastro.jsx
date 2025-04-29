@@ -14,7 +14,7 @@ const Cadastro = (props) => {
                 </div>
                 <div className="campo_cad_genero" style={{display:props.visibilidade}}>
                     <label htmlFor="genero">Genero:</label>
-                    <select name="" id="">
+                    <select name="" id="" >
                         /*disabled: desabilita a opcao de selecionar */
                         /*selected: faz com a opcao ja venha selecionada */
                         <option value="" disabled selected>Selecione</option>
