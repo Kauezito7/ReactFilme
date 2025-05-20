@@ -29,17 +29,19 @@ const Lista = (props) => {
                         {props.lista && props.lista.length > 0 ? (
                             // vamos mapear os itens da lista
                             props.lista.map((item) => (
-                                <tr className="item_lista" key={item.idGenero}>
+                                <tr className="item_lista" key={item.idGenero}> 
 
                                     <td data-cell="Nome">
                                         {item.nome}
                                     </td>
                                     <td data-cell="Genero" style={{ display: props.visibilidade }}>Acao</td>
-                                    <td data-cell="Editar"><img src={Editar} alt="Caneta" /></td>
-                                    <td data-cell="Excluir"> 
-                                       
-                                        <img src={Excluir} alt="Lixeira" onClick={() => props.onExcluir(item.idGenero)} style={{cursor:"pointer"}}/>
-                                       
+
+                                    <td data-cell="Editar">
+                                            <img src={Editar} alt="Caneta" onClick={() => { props.funcEditar(item) }} style={{ cursor: "pointer" }}/>   
+                                    </td>
+
+                                    <td data-cell="Excluir">
+                                        <img src={Excluir} alt="Lixeira" onClick={() => props.funcExcluir(item.idGenero)} style={{ cursor: "pointer" }} />
                                     </td>
 
                                 </tr>

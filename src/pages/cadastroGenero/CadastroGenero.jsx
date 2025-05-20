@@ -22,7 +22,7 @@ const CadastroGenero = () => {
   const [excluiGenero, setExluirGenero] = useState();
 
 
-  function alerta(icone, mensagem) {
+  function alertar(icone, mensagem) {
     const Toast = Swal.mixin({
       toast: true,
       position: "top-end",
@@ -50,16 +50,17 @@ const CadastroGenero = () => {
       try {
         //cadastrar um gênero: post
         await api.post("genero", { nome: genero })
-        alerta("success", "Cadastro realizado com sucesso!")
+        alertar("success", "Cadastro realizado com sucesso!")
         setGenero("")
+        listarGenero();
       }
       catch (error) {
-        alerta("error", "Erro! Entre em contato com o suporte!")
+        alertar("error", "Erro! Entre em contato com o suporte!")
         console.log(error);
       }
     }
     else {
-      alerta("error", "Erro! Campo vazio!")
+      alertar("error", "Erro! Campo vazio!")
     }
 
   }
@@ -83,13 +84,13 @@ const CadastroGenero = () => {
   async function excluirGenero(idDoGenero) {
     try {
       const excluir = await api.delete(`genero/${idDoGenero}`);
-      
+
       // Animacao quando aperta o excluir
       setExluirGenero(excluir.data);
       Swal.fire({
         title: "Voce tem certeza que deseja excluir?",
         text: "Você não poderá reverter isso!",
-        icon: "cuidado",
+        icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
@@ -111,6 +112,31 @@ const CadastroGenero = () => {
     }
   }
 
+  // funcao de editar o genero;)
+
+  async function editarGenero(genero) {
+    const { value: novoGenero } = await Swal.fire({
+      title: "Modifique seu genero",
+      input: "text",
+      inputLabel: "Novo genero",
+      inputValue: genero.nome,
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return "o campo nao pode estar vazio!!!";
+        }
+      }
+    });
+    if (novoGenero) {
+       try {
+            await api.put(`genero/${genero.idGenero}`,
+             {nome: novoGenero});
+            Swal.fire(`O genero moficado ${novoGenero}`);
+          } catch (error) {
+            console.log(error);           
+          }
+    }
+  }
 
   //  //Teste
   //   useEffect(() => {
@@ -123,14 +149,16 @@ const CadastroGenero = () => {
   useEffect(() => {
     listarGenero()
 
-  }, [listarGenero])
+  }, [listaGenero])
 
+
+  // crtl + f = pesquisar
 
 
 
 
   return (
-    
+
     <>
       <Header />
       <main>
@@ -157,7 +185,8 @@ const CadastroGenero = () => {
           //atribuir para lista, o meu estado atual:
           lista={listaGenero}
 
-          onExcluir={excluirGenero}
+          funcExcluir={excluirGenero}
+          funcEditar={editarGenero}
         />
 
       </main>
